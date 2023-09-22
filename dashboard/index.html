@@ -206,6 +206,22 @@
   <!-- mi script -->
   <script src="./assets/js/script.js"></script>
   <script>
+ // Realizar una solicitud AJAX para verificar la conexión
+ fetch("./modelo/conexion_bd.php")
+ .then(response => response.json())
+ .then(data => {
+     if (data.conectado) {
+         alert("Conexión exitosa a la base de datos.");
+     } else {
+         alert("No se pudo establecer la conexión a la base de datos.");
+     }
+ })
+ .catch(error => {
+     alert("Error al verificar la conexión: " + error.message);
+ });
+
+
+
     $(document).ready(function () {
         // Rutas de los archivos JSON
         var archivosJSON = {
