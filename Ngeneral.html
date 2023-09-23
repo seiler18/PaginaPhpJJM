@@ -93,49 +93,58 @@
           <section id="Registrarse" class="container">
             <h1>Regístrate en nuestra página</h1>
             <div class="formulario-container">
-        
-                <form action="" method="POST" id="formulario-registro">
-                    <?php
-                    include("modelo/conexion_bd.php");
-                    include("controlador/registro_usuario.php");
-                    ?>
-                    <div class="form-group">
-                        <label for="nombreUsuario">Nombre de usuario:</label>
-                        <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" >
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="correo">Correo electrónico:</label>
-                        <input type="email" class="form-control" id="correo" name="correo" >
-                    </div>
-        
-                    <div class="form-group">
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" class="form-control" id="contrasena" name="contrasena" >
-                    </div>
-
-        
-                    <button type="submit" name="registro" class="btn btn-primary">Registrarse</button>
-                </form>
+              <form id="formulario-registro">
+                <div class="form-group">
+                  <label for="nombreUsuario">Nombre de usuario:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombreUsuario"
+                    name="nombreUsuario"
+                  />
+                </div>
+    
+                <div class="form-group">
+                  <label for="correo">Correo electrónico:</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="correo"
+                    name="correo"
+                  />
+                </div>
+    
+                <div class="form-group">
+                  <label for="contrasena">Contraseña:</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="contrasena"
+                    name="contrasena"
+                  />
+                </div>
+                <input hidden name="operation" value="createUser" />
+                
+    
+                <button class="btn btn-primary">Registrarse</button>
+              </form>
             </div>
-        </section>
-
-
-    <section id="Contacto" class="container">
-        <h1>Contáctanos</h1>
-        <div class="formulario-container">
-            <form id="formulario-contacto" onsubmit="enviarFormulario(event)">
+          </section>
+    
+          <section id="Contacto" class="container">
+            <h1>Contáctanos</h1>
+            <div class="formulario-container">
+              <form id="formulario-contacto">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="nombre" name="nombre" required />
     
                 <label for="mensaje">Mensaje:</label>
                 <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-    
-                <input type="submit" value="Enviar">
-            </form>
-        </div>
-
-    </section>
+                <input hidden name="operation" value="enviarMensaje" />
+                <button class="btn btn-primary">Enviar mensaje</button>
+              </form>
+            </div>
+          </section>
 </main>
 
 
