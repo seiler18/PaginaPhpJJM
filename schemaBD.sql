@@ -6,8 +6,7 @@ CREATE TABLE usuarios (
 );
 
 CREATE TABLE mensajes_contacto (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    mensaje TEXT NOT NULL,
-    fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(255) NOT NULL,
+  mensaje TEXT NOT NULL
 );

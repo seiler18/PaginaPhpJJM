@@ -27,22 +27,6 @@ function mostrarFechaYHora() {
 // Llama la función cuando el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", mostrarFechaYHora);
 
-function enviarFormulario(event) {
-  event.preventDefault(); // Evitar el envío del formulario por defecto
-
-  // Obtener los valores del formulario
-  const nombre = document.getElementById("nombre").value;
-  const mensaje = document.getElementById("mensaje").value;
-
-  // Restablecer el formulario después de mostrar el mensaje (opcional)
-  document.getElementById("formulario-contacto").reset();
-
-  // Mostrar el mensaje de envío con detalles usando un alert
-  const mensajeConfirmacion = `Formulario enviado con éxito.\nDetalles:\nNombre: ${nombre}\nMensaje: ${mensaje}`;
-  alert(mensajeConfirmacion);
-  console.log(mensajeConfirmacion);
-}
-
 // --------------------------APARTADO DE AJAX-------------------------------
 $(document).ready(function () {
   // obteniendo paginas
@@ -141,10 +125,63 @@ $(document).ready(function () {
       data: datos,
       success: function (response) {
         if (response == "okInsert") {
-          $(formNewUser).append("<div id='mensaje-enviado'></div>");
-          $("#mensaje-enviado")
+          $(formNewUser).append("<div id='usuario-enviado'></div>");
+          $("#usuario-enviado")
             .html("<h2>Usuario creado con éxito.</h2>")
             .append("<p>Nombre: " + name + "</p>")
+            .hide()
+            .fadeIn(1500, function () {
+              $("#usuario-enviado");
+            });
+
+          setTimeout(function () {
+            $("#usuario-enviado").fadeOut(1500, function () {
+              $("#usuario-enviado").remove();
+            });
+          }, 5000);
+
+          // reset form
+          $(formNewUser).trigger("reset");
+        }
+      },
+    });
+  });
+});
+// CREAR NUEVO USUARIO CON JS , AJAX Y PHP-----------------------------------------------------------------------------------------
+
+$(document).ready(function () {
+  // get form
+  const formNewContact = $("#formulario-contacto");
+
+  $(formNewContact).submit(function (e) {
+    // prevent default submiting form
+    e.preventDefault();
+
+    // get values from form
+    var nombre = $("#nombre").val();
+    var mensaje = $("#mensaje").val();
+
+    // create object with values
+    var datos = {
+      nombre: nombre,
+      mensaje: mensaje,
+      operation: "enviarMensaje",
+    };
+
+    // check if values are not empty
+    if (nombre == "" || mensaje == "") {
+      alert("Por favor llene todos los campos");
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "./controllers/contact-controller.php",
+      data: datos,
+      success: function (response) {
+        if (response == "okInsert") {
+          $(formNewContact).append("<div id='mensaje-enviado'></div>");
+          $("#mensaje-enviado")
+            .html("<h2>Mensaje enviado con exito</h2>")
             .hide()
             .fadeIn(1500, function () {
               $("#mensaje-enviado");
@@ -157,13 +194,15 @@ $(document).ready(function () {
           }, 5000);
 
           // reset form
-          $(formNewUser).trigger("reset");
+          $(formNewContact).trigger("reset");
         }
       },
     });
   });
 });
-// CREAR NUEVO USUARIO CON JS , AJAX Y PHP-----------------------------------------------------------------------------------------
+
+
+
 
 // AGREGAR NOTICIA CON JS , AJAX Y PHP---------------------------------------------------------------------------------------------
 function agregarNoticia(event) {
