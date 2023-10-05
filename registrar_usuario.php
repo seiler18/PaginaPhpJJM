@@ -1,13 +1,15 @@
 <?php
-use dashboard\controlador\UsuarioController;
+require_once './dashboard/controlador/UsuarioController.php';
+require_once './dashboard/modelo/Usuario.php';
+
 
 if (isset($_POST['registro'])) {
     $nombreUsuario = $_POST['nombreUsuario'];
-    $correo = $_POST['correo'];
+    $correo = $_POST['correoElectronico'];
     $contrasena = $_POST['contrasena'];
 
     // Crear una instancia del controlador
-    $usuarioController = new UsuarioController();
+    $usuarioController = new \dashboard\controlador\UsuarioController();
 
     // Llamar al método para registrar el usuario
     $resultado = $usuarioController->registrarUsuario($nombreUsuario, $correo, $contrasena);
@@ -24,3 +26,5 @@ if (isset($_POST['registro'])) {
     }
 }
 ?>
+
+

@@ -6,28 +6,25 @@ class ConexionBD {
 
     // Constructor: establece la conexión a la base de datos
     public function __construct() {
-        $this->conexion = new \mysqli("localhost","root","","prueba");
+        try {
+            // Cambiar a PDO para establecer la conexión
+            $dsn = "mysql:host=localhost;dbname=prueba;charset=utf8";
+            $usuario = "root";
+            $contrasena = "";
 
-        if ($this->conexion->connect_error) {
-            die("Conexión fallida: " . $this->conexion->connect_error);
-        } else {
-            echo "Conexión exitosa a la base de datos.";
+            $this->conexion = new \PDO($dsn, $usuario, $contrasena);
+            $this->conexion->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        } catch (\PDOException $e) {
+           //lugar para registrar errores
+            throw $e;
         }
-
-        $this->conexion->set_charset("utf8");
     }
 
     // Método para obtener la conexión a la base de datos
     public function obtenerConexion() {
         return $this->conexion;
     }
-
-    // Destructor: cierra la conexión cuando el objeto es destruido
-    public function __destruct() {
-        $this->conexion->close();
-    }
 }
-
-// Crear una instancia de la clase de conexión
-$conexionBD = new ConexionBD();
 ?>
+
+

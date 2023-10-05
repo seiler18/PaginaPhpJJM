@@ -1,15 +1,16 @@
 <?php
 namespace dashboard\modelo;
 use dashboard\modelo\ConexionBD;
+
 class Usuario {
     private $nombreUsuario;
-    private $correo;
+    private $correoElectronico;
     private $contrasena;
 
     // Constructor
-    public function __construct($nombreUsuario, $correo, $contrasena) {
+    public function __construct($nombreUsuario, $correoElectronico, $contrasena) {
         $this->nombreUsuario = $nombreUsuario;
-        $this->correo = $correo;
+        $this->correoElectronico = $correoElectronico;
         $this->contrasena = $contrasena;
     }
 
@@ -22,12 +23,12 @@ class Usuario {
         $this->nombreUsuario = $nombreUsuario;
     }
 
-    public function getCorreo() {
-        return $this->correo;
+    public function getCorreoElectronico() {
+        return $this->correoElectronico;
     }
 
-    public function setCorreo($correo) {
-        $this->correo = $correo;
+    public function setCorreoElectronico($correoElectronico) {
+        $this->correoElectronico = $correoElectronico;
     }
 
     public function getContrasena() {
@@ -39,36 +40,36 @@ class Usuario {
     }
 
     // Método para insertar un usuario en la base de datos
-   public function registrarUsuario() {
-    // Obtener la instancia de la conexión
-    $conexionBD = new ConexionBD();
-    $conexion = $conexionBD->obtenerConexion();
+    public function registrarUsuario() {
+        // Obtener la instancia de la conexión
+        $conexionBD = new ConexionBD();
+        $conexion = $conexionBD->obtenerConexion();
 
-    // Consulta SQL para insertar un nuevo usuario
-    $sql = "INSERT INTO usuarios (nombre_usuario, correo, contrasena) VALUES (?, ?, ?)";
-    
-    // Preparar la consulta
-    $stmt = $conexion->prepare($sql);
-    
-    if ($stmt) {
-        // Enlazar parámetros
-        $stmt->bind_param("sss", $this->nombreUsuario, $this->correo, $this->contrasena);
-        
-        // Ejecutar la consulta
-        $resultado = $stmt->execute();
-        
-        if ($resultado) {
-            // Cerrar la consulta
-            $stmt->close();
-            return true;
+        // Consulta SQL para insertar un nuevo usuario
+        $sql = "INSERT INTO usuarios (nombre_usuario, correo_electronico, contrasena) VALUES (:nombreUsuario, :correoElectronico, :contrasena)";
+
+        // Preparar la consulta
+        $stmt = $conexion->prepare($sql);
+
+        if ($stmt) {
+            // Enlazar parámetros
+            $stmt->bindParam(':nombreUsuario', $this->nombreUsuario);
+            $stmt->bindParam(':correoElectronico', $this->correoElectronico);
+            $stmt->bindParam(':contrasena', $this->contrasena);
+
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                // Cerrar la consulta
+                $stmt->closeCursor();
+                return true;
+            } else {
+                echo "Error en la consulta: " . implode(", ", $stmt->errorInfo());
+            }
         } else {
-            echo "Error en la consulta: " . $stmt->error;
+            echo "Error en la preparación de la consulta: " . implode(", ", $conexion->errorInfo());
         }
-    } else {
-        echo "Error en la preparación de la consulta: " . $conexion->error;
+
         return false;
     }
 }
-}
-
 ?>

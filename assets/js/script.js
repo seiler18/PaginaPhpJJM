@@ -151,7 +151,7 @@ function registrarUsuario(event) {
 
     // Obtener datos del formulario de registro
     let nombreUsuario = document.getElementById('nombreUsuario').value;
-    let correoUsuario = document.getElementById('correo').value;
+    let correoUsuario = document.getElementById('correoElectronico').value;
     let contraseñaUsuario = document.getElementById('contrasena').value;
 
     // Validar los datos del formulario
@@ -176,5 +176,22 @@ function registrarUsuario(event) {
 
 // Agregar un evento de escucha al formulario de registro
 document.getElementById('formulario-registro').addEventListener('submit', registrarUsuario);
+
+$(document).ready(function() {
+    var successAlert = $("#conexion-success");
+    if (successAlert.length > 0) {
+        setTimeout(function() {
+            successAlert.fadeOut();
+        }, 3000); // 5000 milisegundos (5 segundos)
+    }
+
+    // Ocultar la alerta de error después de 5 segundos
+    var errorAlert = $("#conexion-error");
+    if (errorAlert.length > 0) {
+        setTimeout(function() {
+            errorAlert.fadeOut();
+        }, 3000); // 5000 milisegundos (5 segundos)
+    }
+});
 
   

@@ -1,3 +1,16 @@
+<?php
+require_once './modelo/Conexion_bd.php';
+
+$conexionExitosa = false;
+
+try {
+    $conexionBD = new \dashboard\modelo\ConexionBD();
+    $conexionExitosa = true; // La conexión se estableció correctamente
+} catch (\PDOException $e) {
+    // No se estableció la conexión, puedes registrar el error si es necesario
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -65,7 +78,22 @@
         <img src="./assets/img/elfaro.png" id="Inicio" alt="Banner del faro">
     </div>
     <div id="fecha-hora-banner" class="fecha-hora-banner"></div>
-
+<!-- Mostrar un mensaje al usuario sobre el estado de la conexión si fue exitosa o no -->
+<?php if ($conexionExitosa) { ?>
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="conexion-success">
+        <strong>Conexión exitosa a la base de datos.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php } else { ?>
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert" id="conexion-error">
+        <strong>Error al conectar a la base de datos.</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php } ?>
 
 <main>
     <!-- SECCION DE MIS NOTICIAS -->

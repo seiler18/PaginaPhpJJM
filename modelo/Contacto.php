@@ -1,4 +1,6 @@
 <?php
+namespace dashboard\modelo;
+use dashboard\modelo\ConexionBD;
 
 class Contacto {
     private $nombre;
@@ -27,10 +29,37 @@ class Contacto {
         $this->mensaje = $mensaje;
     }
 
-    // Método para insertar un mensaje de contacto en la base de datos (si es necesario)
+    // Método para insertar un mensaje de contacto en la base de datos
     public function registrarMensaje() {
-        // Aquí iría la lógica para insertar este mensaje de contacto en la base de datos
+        // Obtener la instancia de la conexión
+        $conexionBD = new ConexionBD();
+        $conexion = $conexionBD->obtenerConexion();
+
+        // Consulta SQL para insertar un nuevo mensaje de contacto
+        $sql = "INSERT INTO mensajes_contacto (nombre, mensaje) VALUES (:nombre, :mensaje)";
+
+        // Preparar la consulta
+        $stmt = $conexion->prepare($sql);
+
+        if ($stmt) {
+            // Enlazar parámetros
+            $stmt->bindParam(':nombre', $this->nombre);
+            $stmt->bindParam(':mensaje', $this->mensaje);
+
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                // Cerrar la consulta
+                $stmt->closeCursor();
+                return true;
+            } else {
+                echo "Error en la consulta: " . implode(", ", $stmt->errorInfo());
+            }
+        } else {
+            echo "Error en la preparación de la consulta: " . implode(", ", $conexion->errorInfo());
+        }
+
+        return false;
     }
 }
-
 ?>
+
