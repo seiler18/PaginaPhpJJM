@@ -9,7 +9,7 @@ try {
     $conexionBD = new \dashboard\modelo\ConexionBD();
     $conexionExitosa = true; // La conexión se estableció correctamente
 } catch (\PDOException $e) {
-    // No se estableció la conexión, puedes registrar el error si es necesario
+   
 }
 
 ?>

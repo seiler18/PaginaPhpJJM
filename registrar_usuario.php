@@ -18,8 +18,6 @@ if (isset($_POST['registro'])) {
     if ($resultado) {
         // Mostrar un mensaje de éxito en la misma página o redirigir a otra página
         echo '<div class="alert alert-success">Registro exitoso.</div>';
-        // También puedes redirigir al usuario a una página de inicio de sesión, por ejemplo:
-        // header('Location: login.php');
     } else {
         // Mostrar un mensaje de error en la misma página
         echo '<div class="alert alert-danger">Error en el registro. Inténtalo de nuevo.</div>';
