@@ -56,7 +56,7 @@ try {
         </button>
         <!-- Contenedor para alinear la lista de navegación -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav"> <!-- Aplicamos la clase ml-auto para alinear a la derecha -->
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#Inicio">Inicio</a>
                 </li>

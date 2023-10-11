@@ -18,7 +18,7 @@ try {
     <!-- Para que soporte cualquier caracter de idiomas -->
     <meta charset="UTF-8">
     <!-- Para cambiar la relacion de aspecto -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">                                
     <title>Página web JJM </title>
     <!-- Mi estilo para css :  -->
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -78,7 +78,6 @@ try {
         <img src="./assets/img/elfaro.png" id="Inicio" alt="Banner del faro">
     </div>
     <div id="fecha-hora-banner" class="fecha-hora-banner"></div>
-<!-- Mostrar un mensaje al usuario sobre el estado de la conexión si fue exitosa o no -->
 <!-- Mostrar un mensaje al usuario sobre el estado de la conexión si fue exitosa o no -->
 <?php if ($conexionExitosa) { ?>
     <div class="alert alert-success alert-dismissible fade show text-center" role="alert" id="conexion-success">
